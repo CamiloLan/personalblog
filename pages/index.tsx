@@ -15,24 +15,19 @@ const IndexPage: NextPage = () => {
   return (
     <Layout>
       <h2 className="text-2xl mb-4">Blog Posts</h2>
-      <ul>
+      <ul className="space-y-4">
         {posts.map((post) => (
-          <li key={post.id} className="mb-2 flex justify-between items-center">
+          <li key={post.id} className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center">
             <span>{post.title}</span>
             <div>
-              <Link href={`/edit?id=${post.id}`} className="mr-2">
-                Edit
-              </Link>
-              <button onClick={() => handleDelete(post.id)} className="bg-red-500 text-white px-2 py-1">
+              <Link href={`/edit?id=${post.id}`} className="mr-2 text-blue-500 hover:underline">Edit</Link>
+              <button onClick={() => handleDelete(post.id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition">
                 Delete
               </button>
             </div>
           </li>
         ))}
       </ul>
-      <Link href="/create" className="bg-blue-500 text-white px-4 py-2 mt-4 inline-block">
-        Create New Post
-      </Link>
     </Layout>
   );
 };

@@ -14,7 +14,7 @@ const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
       <div className="mb-4">
         <label className="block text-sm font-bold mb-2">Title</label>
         <input
@@ -22,9 +22,10 @@ const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
+          placeholder="Enter the title of your post"
         />
       </div>
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
         Submit
       </button>
     </form>
