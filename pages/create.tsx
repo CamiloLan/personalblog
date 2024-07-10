@@ -13,8 +13,10 @@ const CreatePostPage: NextPage = () => {
 
   return (
     <Layout>
-      <h2 className="text-2xl mb-4">Create New Post</h2>
-      <PostForm onSubmit={handleSubmit} />
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-4xl font-bold mb-6 text-gray-900">Create New Post</h2>
+        <PostForm onSubmit={handleSubmit} />
+      </div>
     </Layout>
   );
 };
