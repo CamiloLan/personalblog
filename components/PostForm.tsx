@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 interface PostFormProps {
   initialData?: { title: string, content: string };
@@ -10,6 +10,13 @@ const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
   const [content, setContent] = useState(initialData?.content || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title);
+      setContent(initialData.content);
+    }
+  }, [initialData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

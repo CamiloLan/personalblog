@@ -8,16 +8,20 @@ const CreatePostPage: NextPage = () => {
 
   const handleSubmit = async (data: { title: string, content: string }) => {
     try {
-      await fetch('/api/posts', {
+      const response = await fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-      router.push('/');
-    } catch {
-      console.error('Failed to create post');
+      if (response.ok) {
+        router.push('/');
+      } else {
+        console.error('Failed to create post');
+      }
+    } catch (error) {
+      console.error('Failed to create post', error);
     }
   };
 

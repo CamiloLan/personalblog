@@ -32,10 +32,11 @@ const IndexPage: NextPage = () => {
         {message && <p className="text-green-500 mb-4">{message}</p>}
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <ul className="space-y-4">
-          {posts.map((post: { id: number, title: string }) => (
-            <li key={post.id} className="p-4 bg-gray-100 rounded-lg shadow-sm flex justify-between items-center">
-              <span className="text-lg font-medium">{post.title}</span>
-              <div>
+          {posts.map((post: { id: number, title: string, content: string }) => (
+            <li key={post.id} className="p-4 bg-gray-100 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+              <p className="text-gray-700 mb-4">{post.content}</p>
+              <div className="flex justify-between">
                 <Link href={`/edit?id=${post.id}`} className="mr-2 text-blue-500 hover:underline">Edit</Link>
                 <button
                   onClick={() => handleDelete(post.id)}

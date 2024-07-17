@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-let posts = [
-  { id: 1, title: 'First Post', content: 'This is the first post content' },
-  { id: 2, title: 'Second Post', content: 'This is the second post content' },
-];
+let posts = [];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
