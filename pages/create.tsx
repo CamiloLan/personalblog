@@ -6,9 +6,19 @@ import PostForm from '../components/PostForm';
 const CreatePostPage: NextPage = () => {
   const router = useRouter();
 
-  const handleSubmit = (data: { title: string }) => {
-    console.log('Creating post:', data);
-    router.push('/');
+  const handleSubmit = async (data: { title: string, content: string }) => {
+    try {
+      await fetch('/api/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      router.push('/');
+    } catch {
+      console.error('Failed to create post');
+    }
   };
 
   return (

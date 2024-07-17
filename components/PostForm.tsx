@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 
 interface PostFormProps {
-  initialData?: { title: string };
-  onSubmit: (data: { title: string }) => void;
+  initialData?: { title: string, content: string };
+  onSubmit: (data: { title: string, content: string }) => void;
 }
 
 const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
   const [title, setTitle] = useState(initialData?.title || '');
+  const [content, setContent] = useState(initialData?.content || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -16,7 +17,7 @@ const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
     setError('');
 
     try {
-      await onSubmit({ title });
+      await onSubmit({ title, content });
     } catch (err) {
       setError('An error occurred. Please try again.');
     } finally {
@@ -34,6 +35,15 @@ const PostForm: FC<PostFormProps> = ({ initialData, onSubmit }) => {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
           placeholder="Enter the title of your post"
+        />
+      </div>
+      <div className="mb-6">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
+          placeholder="Enter the content of your post"
         />
       </div>
       {error && <p className="text-red-500 mb-4">{error}</p>}

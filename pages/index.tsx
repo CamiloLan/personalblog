@@ -1,21 +1,26 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const IndexPage: NextPage = () => {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'First Post' },
-    { id: 2, title: 'Second Post' },
-  ]);
+  const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const handleDelete = (id: number) => {
+  useEffect(() => {
+    fetch('/api/posts')
+      .then(res => res.json())
+      .then(data => setPosts(data))
+      .catch(err => setError('Failed to load posts'));
+  }, []);
+
+  const handleDelete = async (id: number) => {
     try {
+      await fetch(`/api/posts/${id}`, { method: 'DELETE' });
       setPosts(posts.filter(post => post.id !== id));
       setMessage('Post deleted successfully.');
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     }
   };
@@ -27,7 +32,7 @@ const IndexPage: NextPage = () => {
         {message && <p className="text-green-500 mb-4">{message}</p>}
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <ul className="space-y-4">
-          {posts.map((post) => (
+          {posts.map((post: { id: number, title: string }) => (
             <li key={post.id} className="p-4 bg-gray-100 rounded-lg shadow-sm flex justify-between items-center">
               <span className="text-lg font-medium">{post.title}</span>
               <div>
