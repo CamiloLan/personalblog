@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-let posts = [];
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+let posts: Post[] = [];
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
